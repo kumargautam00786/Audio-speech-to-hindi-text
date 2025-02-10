@@ -3,6 +3,21 @@ import speech_recognition as sr
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit, QHBoxLayout
 from PyQt5.QtCore import QThread, pyqtSignal
 from transformers import pipeline, AutoProcessor, AutoModelForSpeechSeq2Seq
+import os
+from transformers import file_utils
+
+
+############### Get the name of all the model installed
+# Get the default cache directory (may be overridden by TRANSFORMERS_CACHE or HF_HOME)
+cache_dir = file_utils.default_cache_path
+print("Default Transformers cache directory:", cache_dir)
+
+# List all items in the cache directory
+print("\nCached files and directories:")
+for item in os.listdir(cache_dir):
+    print(item)
+
+
 
 class TranscriptionThread(QThread):
     transcription_signal = pyqtSignal(str)
